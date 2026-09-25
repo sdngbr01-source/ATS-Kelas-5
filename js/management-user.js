@@ -36,6 +36,9 @@ async function loadUsers(forceRefresh = false) {
         snapshot.forEach(doc => {
             users.push({ id: doc.id, ...doc.data() });
         });
+        users.sort((a, b) => 
+    (a.nama || '').localeCompare(b.nama || '', 'id', { numeric: true, sensitivity: 'base' })
+);
         
         // Simpan ke cache
         userCache = {
